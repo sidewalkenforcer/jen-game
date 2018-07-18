@@ -1,13 +1,15 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-div', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-div', {
+    preload: preload,
+    create: create,
+    update: update
+});
 
 function preload() {
-
+   
 	game.load.spritesheet('redcar', 'assets/pixel art car 1 (2).png', 60, 25);
     game.load.spritesheet('bluecar', 'assets/pixel art car 1 (1).png', 60, 25);
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('star', 'assets/star.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
-	
+    
+
 }
 	var keys;
 
@@ -31,6 +33,7 @@ function create() {
 	
 	
 	this.bluecar = this.game.add.sprite(90,225, 'bluecar')
+
 
 	this.bluecar.anchor.set(0.5);
 	
@@ -81,3 +84,5 @@ function update() {
 			this.game.physics.arcade.velocityFromAngle(this.bluecar.angle, 250, this.bluecar.body.velocity);
 		}
 }
+function update() {}
+
