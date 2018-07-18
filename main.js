@@ -6,7 +6,7 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-div', {
 
 function preload() {
     game.load.image('red car',
-        'assets/pixel art car 1 (2).png')
+        'assets/pixel art car 1 version 2.0.png');
 
     game.load.image('blue car', 'assets/pixel art car 1 (1).png');
     game.load.image('battery', 'assets/battery power up.gif');
