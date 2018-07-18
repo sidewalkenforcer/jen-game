@@ -8,7 +8,7 @@ function preload() {
     game.load.image('red car',
         'assets/pixel art car 1 version 2.0.png');
 
-    game.load.image('blue car', 'assets/pixel art car 1 (1).png');
+    game.load.image('blue car', 'assets/pixel art car 2 version 2.0.png');
     game.load.image('battery', 'assets/battery power up.gif');
     game.load.image('star', 'assets/star.png');
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
