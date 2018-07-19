@@ -5,8 +5,15 @@ var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-div', {
 });
 
 function preload() {
-    game.load.image('battery up',
-        'assets/battery up 2.png');
+    game.load.spritesheet('slow power',
+        'assets/slow power up 1.png',
+        70, 130);
+    game.load.spritesheet('rewind power',
+        'assets/rewind power up 1.png', 270, 120);
+    game.load.spritesheet('battery down',
+        'assets/battery down.png', 300, 150);
+    game.load.spritesheet('battery up',
+        'assets/battery up 2.png', 250, 100);
     game.load.spritesheet('freexe power',
         'assets/freexe power up.png', 150, 200);
     game.load.spritesheet('redcar', 'assets/pixel art car 1 version 2.0.png', 60, 25);
@@ -14,15 +21,26 @@ function preload() {
 
 }
 var keys;
+var Car1;
+var car2;
+var battery1;
+var battery2;
+var freeze;
+var rewind;
+var slowpower;
 
 
 function create() {
-    game.add.sprite(50, 100, 'battery up');
-    game.add.sprite(20, 20, 'freexe power');
+    game.add.sprite(150, 200, 'battery down');
+    freeze = game.add.sprite(-20, -20, 'freexe power');
+
+    game.add.sprite(50, 50, 'slow power');
+
 
     this.redcar = this.game.add.sprite(180, 225, 'redcar')
 
     this.redcar.anchor.set(0.5);
+    this.redcar.addChild(freeze);
 
     game.physics.arcade.enable(this.redcar);
 
