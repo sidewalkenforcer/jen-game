@@ -12,7 +12,7 @@ var mainmenuState = {
             'assets/you lost page.png', )
     },
     create: function () {
-        game.add.sprite('losepage')
+        game.add.sprite(0, 0, 'losepage')
     }
 }
 
