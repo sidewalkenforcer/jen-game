@@ -130,6 +130,14 @@ function update() {
     this.game.physics.arcade.overlap(
         this.redcar, slowpower, removeSlowpower, null, this
     );
+    var removeBattery1 = function (redcar, battery1) {
+        console.log('removeBattery1')
+        battery1.kill();
+    };
+
+    this.game.physics.arcade.overlap(
+        this.redcar, battery1, removeBattery1, null, this
+    );
 
 
 }
