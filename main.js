@@ -1,12 +1,14 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-div', {
+var gameState = {
     preload: preload,
     create: create,
     update: update
-});
+};
+
+game.state.add("gameState", gameState);
 
 function preload() {
 
-	game.load.spritesheet('redcar', 'assets/pixel art car 1 (2).png', 60, 25);
+    game.load.spritesheet('redcar', 'assets/pixel art car 1 (2).png', 60, 25);
     game.load.spritesheet('slow power',
         'assets/slow power up 1.png',
         400, 400);
@@ -20,7 +22,7 @@ function preload() {
         'assets/freexe power up.png', 150, 200);
 
     game.load.spritesheet('bluecar', 'assets/pixel art car 1 (1).png', 60, 25);
-	game.load.image('chicken', 'assets/New Piskel.png', 32, 32);
+    game.load.image('chicken', 'assets/New Piskel.png', 32, 32);
 
 }
 var keys;
@@ -33,19 +35,19 @@ var rewind;
 var slowpower;
 
 function create() {
-	
+
     batterydown = game.add.sprite(150, 250, 'battery down');
     freeze = game.add.sprite(-20, -20, 'freexe power');
 
     slowpower = game.add.sprite(150, 150, 'slow power');
-	game.physics.arcade.enable(slowpower);
-	
+    game.physics.arcade.enable(slowpower);
+
 
     this.redcar = this.game.add.sprite(180, 225, 'redcar')
 
     this.redcar.anchor.set(0.5);
-	
-	// line makes the freeze sprite follow the car//
+
+    // line makes the freeze sprite follow the car//
     this.redcar.addChild(freeze);
 
     game.physics.arcade.enable(this.redcar);
@@ -59,30 +61,30 @@ function create() {
     };
 
 
-	
-	game.add.sprite(100, 100, 'chicken');
-	
-	
-	this.bluecar = this.game.add.sprite(90,225, 'bluecar')
 
-	this.bluecar.anchor.set(0.5);
-	
-	game.physics.arcade.enable(this.bluecar);
-	
-	this.bluecarControls = {
-		up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
-		down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
-		left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
-		right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
-	};
-	
-	this.redcar.animations.add('left', [0, 1, 2, 3], 10, true);
+    game.add.sprite(100, 100, 'chicken');
+
+
+    this.bluecar = this.game.add.sprite(90, 225, 'bluecar')
+
+    this.bluecar.anchor.set(0.5);
+
+    game.physics.arcade.enable(this.bluecar);
+
+    this.bluecarControls = {
+        up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
+        down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
+        left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
+        right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
+    };
+
+    this.redcar.animations.add('left', [0, 1, 2, 3], 10, true);
     this.bluecar.animations.add('right', [0, 1, 2, 3], 10, true);
-	
-	
-	slowpower.scale.setTo(0.1, 0.1);
-	batterydown.scale.setTo(0.2, 0.2)
-	
+
+
+    slowpower.scale.setTo(0.1, 0.1);
+    batterydown.scale.setTo(0.2, 0.2)
+
 }
 
 function update() {
@@ -120,6 +122,14 @@ function update() {
     this.game.physics.arcade.overlap(
         this.bluecar, slowpower, removeSlowpower, null, this
     );
+    var removeSlowpower = function (redcar, slowpower) {
+        console.log('removeSlowpower')
+        slowpower.kill();
+    };
+
+    this.game.physics.arcade.overlap(
+        this.redcar, slowpower, removeSlowpower, null, this
+    );
+
 
 }
-
