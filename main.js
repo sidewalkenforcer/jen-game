@@ -32,24 +32,35 @@ var freeze;
 var rewind;
 var slowpower;
 
-
 function create() {
 	
-	game.add.sprite(100, 100, 'chicken');
-	
-	this.redcar = this.game.add.sprite(180,225, 'redcar')
+    batterydown = game.add.sprite(150, 250, 'battery down');
+    freeze = game.add.sprite(-20, -20, 'freexe power');
 
-	this.redcar.anchor.set(0.5);
+    slowpower = game.add.sprite(150, 150, 'slow power');
+	game.physics.arcade.enable(slowpower);
 	
-	game.physics.arcade.enable(this.redcar);
+
+    this.redcar = this.game.add.sprite(180, 225, 'redcar')
+
+    this.redcar.anchor.set(0.5);
 	
- 
-	this.cursor = {
-		up: this.game.input.keyboard.addKey(Phaser.Keyboard.UP),
-		down: this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
-		left: this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
-		right: this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
-	}
+	// line makes the freeze sprite follow the car//
+    this.redcar.addChild(freeze);
+
+    game.physics.arcade.enable(this.redcar);
+
+
+    this.cursor = {
+        up: this.game.input.keyboard.addKey(Phaser.Keyboard.UP),
+        down: this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
+        left: this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
+        right: this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
+    };
+
+
+	
+	game.add.sprite(100, 100, 'chicken');
 	
 	
 	this.bluecar = this.game.add.sprite(90,225, 'bluecar')
@@ -68,71 +79,47 @@ function create() {
 	this.redcar.animations.add('left', [0, 1, 2, 3], 10, true);
     this.bluecar.animations.add('right', [0, 1, 2, 3], 10, true);
 	
-	for (var i = 0; i <0; i++)
-    {
-        //  Create 15 sprites at random x/y locations
-        var sprite = game.add.sprite(game.world.randomX, game.world.randomY, 'slow power');
-
-        //  Pick a random number between -2 and 6
-        var rand = game.rnd.realInRange(-2, 6);
-
-        //  Set the scale of the sprite to the random value
-        sprite.scale.setTo(rand, rand);
-
-        //  You can also scale sprites like this:
-        //  sprite.scale.x = value;
-        //  sprite.scale.y = value;
-
-    }
 	
-	  game.add.sprite(150, 200, 'battery down');
-    freeze = game.add.sprite(-20, -20, 'freexe power');
-
-    game.add.sprite(50, 50, 'slow power');
+	slowpower.scale.setTo(0.1, 0.1);
+	batterydown.scale.setTo(0.2, 0.2)
 	
-	slowpower.scale.setTo(4, 4);
 }
 
 function update() {
-	this.redcar.body.velocity.x = 0;
-	this.redcar.body.velocity.y = 0;
-	this.redcar.body.angularVelocity = 0;
-	
-	if (this.cursor.left.isDown)
-		{
-			this.redcar.body.angularVelocity = -250;
-			this.redcar.animations.play('right');
-		}
-	else if (this.cursor.right.isDown)
-		{
-			this.redcar.body.angularVelocity = 250;
-			this.redcar.animations.play('left');
-		}
-	if (this.cursor.up.isDown)
-		{
-			this.game.physics.arcade.velocityFromAngle(this.redcar.angle, 250, this.redcar.body.velocity);
-		}
+    this.redcar.body.velocity.x = 0;
+    this.redcar.body.velocity.y = 0;
+    this.redcar.body.angularVelocity = 0;
 
-	this.bluecar.body.velocity.x = 0;
-	this.bluecar.body.velocity.y = 0;
-	this.bluecar.body.angularVelocity = 0;
-	
-	if (this.bluecarControls.left.isDown)
-		{
-			this.bluecar.body.angularVelocity = -250;
-			this.bluecar.animations.play('right');
-		}
-	else if (this.bluecarControls.right.isDown)
-		{
-			this.bluecar.body.angularVelocity = 250;
-			this.bluecar.animations.play('left');
-		}
-	if (this.bluecarControls.up.isDown)
-		{
-			this.game.physics.arcade.velocityFromAngle(this.bluecar.angle, 250, this.bluecar.body.velocity);
-		}
+    if (this.cursor.left.isDown) {
+        this.redcar.body.angularVelocity = -250;
+    } else if (this.cursor.right.isDown) {
+        this.redcar.body.angularVelocity = 250;
+    }
+    if (this.cursor.up.isDown) {
+        this.game.physics.arcade.velocityFromAngle(this.redcar.angle, 250, this.redcar.body.velocity);
+    }
 
+    this.bluecar.body.velocity.x = 0;
+    this.bluecar.body.velocity.y = 0;
+    this.bluecar.body.angularVelocity = 0;
 
-  
+    if (this.bluecarControls.left.isDown) {
+        this.bluecar.body.angularVelocity = -250;
+    } else if (this.bluecarControls.right.isDown) {
+        this.bluecar.body.angularVelocity = 250;
+    }
+    if (this.bluecarControls.up.isDown) {
+        this.game.physics.arcade.velocityFromAngle(this.bluecar.angle, 250, this.bluecar.body.velocity);
+    }
+
+    var removeSlowpower = function (bluecar, slowpower) {
+        console.log('removeSlowpower')
+        slowpower.kill();
+    };
+
+    this.game.physics.arcade.overlap(
+        this.bluecar, slowpower, removeSlowpower, null, this
+    );
 
 }
+
