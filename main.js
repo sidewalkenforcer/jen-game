@@ -34,7 +34,7 @@ function create() {
     game.add.sprite(150, 200, 'battery down');
     freeze = game.add.sprite(-20, -20, 'freexe power');
 
-    game.add.sprite(50, 50, 'slow power');
+    slowpower = game.add.sprite(50, 50, 'slow power');
 
 
     this.redcar = this.game.add.sprite(180, 225, 'redcar')
@@ -60,6 +60,7 @@ function create() {
     this.bluecar.anchor.set(0.5);
 
     game.physics.arcade.enable(this.bluecar);
+    game.physics.arcade.enable(slowpower);
 
     this.bluecarControls = {
         up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
@@ -97,4 +98,14 @@ function update() {
     if (this.bluecarControls.up.isDown) {
         this.game.physics.arcade.velocityFromAngle(this.bluecar.angle, 250, this.bluecar.body.velocity);
     }
+
+    var removeSlowpower = function (bluecar, slowpower) {
+        console.log('removeSlowpower')
+        slowpower.kill();
+    };
+
+    this.game.physics.arcade.overlap(
+        this.bluecar, slowpower, removeSlowpower, null, this
+    );
+
 }
