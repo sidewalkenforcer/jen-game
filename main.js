@@ -9,7 +9,7 @@ function preload() {
 	game.load.spritesheet('redcar', 'assets/pixel art car 1 (2).png', 60, 25);
     game.load.spritesheet('slow power',
         'assets/slow power up 1.png',
-        70, 130);
+        400, 400);
     game.load.spritesheet('rewind power',
         'assets/rewind power up 1.png', 270, 120);
     game.load.spritesheet('battery down',
@@ -44,7 +44,6 @@ function create() {
 	game.physics.arcade.enable(this.redcar);
 	
  
-	
 	this.cursor = {
 		up: this.game.input.keyboard.addKey(Phaser.Keyboard.UP),
 		down: this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
@@ -69,6 +68,29 @@ function create() {
 	this.redcar.animations.add('left', [0, 1, 2, 3], 10, true);
     this.bluecar.animations.add('right', [0, 1, 2, 3], 10, true);
 	
+	for (var i = 0; i <0; i++)
+    {
+        //  Create 15 sprites at random x/y locations
+        var sprite = game.add.sprite(game.world.randomX, game.world.randomY, 'slow power');
+
+        //  Pick a random number between -2 and 6
+        var rand = game.rnd.realInRange(-2, 6);
+
+        //  Set the scale of the sprite to the random value
+        sprite.scale.setTo(rand, rand);
+
+        //  You can also scale sprites like this:
+        //  sprite.scale.x = value;
+        //  sprite.scale.y = value;
+
+    }
+	
+	  game.add.sprite(150, 200, 'battery down');
+    freeze = game.add.sprite(-20, -20, 'freexe power');
+
+    game.add.sprite(50, 50, 'slow power');
+	
+	slowpower.scale.setTo(4, 4);
 }
 
 function update() {
@@ -111,42 +133,6 @@ function update() {
 		}
 
 
-    game.add.sprite(150, 200, 'battery down');
-    freeze = game.add.sprite(-20, -20, 'freexe power');
-
-    game.add.sprite(50, 50, 'slow power');
-
-
-//    this.redcar = this.game.add.sprite(180, 225, 'redcar')
-//
-//    this.redcar.anchor.set(0.5);
-//    this.redcar.addChild(freeze);
-//
-//    game.physics.arcade.enable(this.redcar);
-
-
-//    this.cursor = {
-//        up: this.game.input.keyboard.addKey(Phaser.Keyboard.UP),
-//        down: this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
-//        left: this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
-//        right: this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
-//    };
-//
-//
-//
-//    this.bluecar = this.game.add.sprite(90, 225, 'bluecar')
-//
-//
-//    this.bluecar.anchor.set(0.5);
-//
-//    game.physics.arcade.enable(this.bluecar);
-//
-//    this.bluecarControls = {
-//        up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
-//        down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
-//        left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
-//        right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
-//    };
-
+  
 
 }
