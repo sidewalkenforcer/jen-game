@@ -13,11 +13,11 @@ function preload() {
         'assets/slow power up 1.png',
         400, 400);
     game.load.spritesheet('rewind power',
-        'assets/rewind power up 1.png', 270, 120);
+        'assets/rewind power up 1.png', 512, 512);
     game.load.spritesheet('battery down',
         'assets/battery down.png', 264, 129);
     game.load.spritesheet('battery up',
-        'assets/battery up 2.png', 250, 100);
+        'assets/battery up 2.png', 512, 512);
     game.load.spritesheet('freexe power',
         'assets/freexe power up.png', 150, 200);
 
@@ -36,10 +36,17 @@ var slowpower;
 
 function create() {
 
+	batteryup = game.add.sprite(50, 120, 'battery up')
+	
+	rewind = game.add.sprite(300,200, 'rewind power');
+	
+
     batterydown = game.add.sprite(150, 250, 'battery down');
+	
     freeze = game.add.sprite(-20, -20, 'freexe power');
 
     slowpower = game.add.sprite(150, 150, 'slow power');
+
     game.physics.arcade.enable(slowpower);
 
 
@@ -81,10 +88,13 @@ function create() {
     this.redcar.animations.add('left', [0, 1, 2, 3], 10, true);
     this.bluecar.animations.add('right', [0, 1, 2, 3], 10, true);
 
-
-    slowpower.scale.setTo(0.1, 0.1);
-    batterydown.scale.setTo(0.2, 0.2)
-
+	
+	
+	slowpower.scale.setTo(0.1, 0.1);
+	batterydown.scale.setTo(0.2, 0.2);
+	rewind.scale.setTo(0.1,0.1);
+	batteryup.scale.setTo(0.1,0.1)
+	
 }
 
 function update() {
