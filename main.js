@@ -22,7 +22,7 @@ function preload() {
         'assets/freexe power up.png', 150, 200);
 
     game.load.spritesheet('bluecar', 'assets/pixel art car 1 (1).png', 60, 25);
-    game.load.image('chicken', 'assets/New Piskel.png', 32, 32);
+    game.load.spritesheet('chicken', 'assets/New Piskel.png', 32, 32);
 
 }
 var keys;
@@ -33,12 +33,14 @@ var battery2;
 var freeze;
 var rewind;
 var slowpower;
+var chicken; 
 
 function create() {
 
 	batteryup = game.add.sprite(50, 120, 'battery up')
 	
 	rewind = game.add.sprite(300,200, 'rewind power');
+	game.physics.arcade.enable(rewind);
 	
 
     batterydown = game.add.sprite(150, 250, 'battery down');
@@ -46,8 +48,15 @@ function create() {
     freeze = game.add.sprite(-20, -20, 'freexe power');
 
     slowpower = game.add.sprite(150, 150, 'slow power');
-
     game.physics.arcade.enable(slowpower);
+	
+	chicekn = game.add.sprite(200, 200, 'chicken');
+
+	
+	
+	
+	
+	
 
 
     this.redcar = this.game.add.sprite(180, 225, 'redcar')
@@ -69,12 +78,10 @@ function create() {
 
 
 
-    game.add.sprite(100, 100, 'chicken');
-
-
     this.bluecar = this.game.add.sprite(90, 225, 'bluecar')
 
     this.bluecar.anchor.set(0.5);
+
 
     game.physics.arcade.enable(this.bluecar);
 
@@ -140,6 +147,16 @@ function update() {
     this.game.physics.arcade.overlap(
         this.redcar, slowpower, removeSlowpower, null, this
     );
-
+	
+	
+	
+	var removeRewind = function (redcar, rewind) {
+		console.log('removeRewind')
+		rewind.kill();
+	}
+	
+	this.game.physics.arcade.overlap(
+		this.bluecar, rewind, removeRewind, null, this
+	);
 
 }
