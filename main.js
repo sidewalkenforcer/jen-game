@@ -156,6 +156,15 @@ function update() {
 	}
 	
 	this.game.physics.arcade.overlap(
+		this.redcar, rewind, removeRewind, null, this
+	);
+	
+		var removeRewind = function (bluecar, rewind) {
+		console.log('removeRewind')
+		rewind.kill();
+	}
+	
+	this.game.physics.arcade.overlap(
 		this.bluecar, rewind, removeRewind, null, this
 	);
 
