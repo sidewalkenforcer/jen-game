@@ -1,1 +1,1 @@
-game.state.start("mainmenustate");
+game.state.start("gameState");

@@ -1,5 +1,3 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-div');
-
 var gameState = {
     preload: preload,
     create: create,
