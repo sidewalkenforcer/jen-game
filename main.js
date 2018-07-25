@@ -87,7 +87,7 @@ function create() {
         right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
     };
 
-    redcar.animations.add('left', [0, 1, 2, 3], 10, true);
+   redcar.animations.add('left', [0, 1, 2, 3], 10, true);
     this.bluecar.animations.add('right', [0, 1, 2, 3], 10, true);
 
 
@@ -143,8 +143,17 @@ function update() {
         redcar, slowpower, removeSlowpower, null, this
     );
 
-
+// rewind 
     var removeRewind = function (redcar, rewind) {
+        console.log('removeRewind')
+        rewind.kill();
+    }
+
+    this.game.physics.arcade.overlap(
+        this.redcar, rewind, removeRewind, null, this
+    );
+
+    var removeRewind = function (bluecar, rewind) {
         console.log('removeRewind')
         rewind.kill();
     }
@@ -153,45 +162,17 @@ function update() {
         this.bluecar, rewind, removeRewind, null, this
     );
 
-    var removeRewind = function (redcar, rewind) {
-        console.log('removeRewind')
-        rewind.kill();
-    }
-
-    this.game.physics.arcade.overlap(
-        this.bluecar, rewind, removeRewind, null, this
-    );
-
 	
-	
-	
-	var removeRewind = function (redcar, rewind) {
-		console.log('removeRewind')
-		rewind.kill();
-	}
-	
-	this.game.physics.arcade.overlap(
-		this.redcar, rewind, removeRewind, null, this
-	);
-	
-		var removeRewind = function (bluecar, rewind) {
-		console.log('removeRewind')
-		rewind.kill();
-	}
-	
-	this.game.physics.arcade.overlap(
-		this.bluecar, rewind, removeRewind, null, this
-	);
-
-    var removeBatteryup = function (redcar, batteryup) {
-        console.log('removeBatteryup')
-        rewind.kill();
-    }
-
-
-    this.game.physics.arcade.overlap(
-        this.bluecar, batteryup, removeBatteryup, null, this
-    );
+// battery 
+//    var removeBattery = function (redcar, battery1) {
+//        console.log('removeBattery')
+//        battery1.kill();
+//    }
+//
+//
+//    this.game.physics.arcade.overlap(
+//        this.redcar, battery1, removeBattery, null, this
+//    );
 
 
 }
