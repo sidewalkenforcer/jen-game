@@ -1,1 +1,1 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game-div');
+var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.AUTO, 'game-div');

@@ -35,7 +35,8 @@ var rewind;
 var slowpower;
 var chicken;
 var redcar;
-
+var blueControls;
+var bluecar;
 
 function create() {
 
@@ -125,14 +126,14 @@ function create() {
 
 
 
-    this.bluecar = this.game.add.sprite(90, 225, 'bluecar');
+    bluecar = this.game.add.sprite(90, 225, 'bluecar');
 
-    this.bluecar.anchor.set(0.5);
+    bluecar.anchor.set(0.5);
 
 
-    game.physics.arcade.enable(this.bluecar);
+    game.physics.arcade.enable(bluecar);
 
-    this.bluecarControls = {
+    blueControls = {
         up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
         down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
         left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
@@ -140,7 +141,7 @@ function create() {
     };
 
     redcar.animations.add('left', [0, 1, 2, 3], 10, true);
-    this.bluecar.animations.add('right', [0, 1, 2, 3], 10, true);
+    bluecar.animations.add('right', [0, 1, 2, 3], 10, true);
 
 
 
@@ -165,17 +166,17 @@ function update() {
         this.game.physics.arcade.velocityFromAngle(redcar.angle, 250, redcar.body.velocity);
     }
 
-    this.bluecar.body.velocity.x = 0;
-    this.bluecar.body.velocity.y = 0;
-    this.bluecar.body.angularVelocity = 0;
+    bluecar.body.velocity.x = 0;
+    bluecar.body.velocity.y = 0;
+    bluecar.body.angularVelocity = 0;
 
-    if (this.bluecarControls.left.isDown) {
-        this.bluecar.body.angularVelocity = -250;
-    } else if (this.bluecarControls.right.isDown) {
-        this.bluecar.body.angularVelocity = 250;
+    if (blueControls.left.isDown) {
+        bluecar.body.angularVelocity = -250;
+    } else if (blueControls.right.isDown) {
+        bluecar.body.angularVelocity = 250;
     }
-    if (this.bluecarControls.up.isDown) {
-        this.game.physics.arcade.velocityFromAngle(this.bluecar.angle, 250, this.bluecar.body.velocity);
+    if (blueControls.up.isDown) {
+        this.game.physics.arcade.velocityFromAngle(bluecar.angle, 250, bluecar.body.velocity);
     }
     var removeSlowpower = function (bluecar, slowpower) {
         console.log('removeSlowpower')
@@ -183,7 +184,7 @@ function update() {
     };
 
     this.game.physics.arcade.overlap(
-        this.bluecar, slowpower, removeSlowpower, null, this
+        bluecar, slowpower, removeSlowpower, null, this
     );
     var removeSlowpower = function (redcar, slowpower) {
         console.log('removeSlowpower')
@@ -210,13 +211,14 @@ function update() {
     }
 
     this.game.physics.arcade.overlap(
-        this.bluecar, rewind, removeRewind, null, this
+        bluecar, rewind, removeRewind, null, this
     );
 
     var removeBatteryup = function (redcar, batteryup) {
         console.log('removeBatteryup')
         batteryup.kill();
     }
+
     this.game.physics.arcade.overlap(
         redcar, batteryup, removeBatteryup, null, this
     );
@@ -226,7 +228,7 @@ function update() {
         batteryup.kill();
     }
     this.game.physics.arcade.overlap(
-        this.bluecar, batteryup, removeBatteryup, null, this
+        bluecar, batteryup, removeBatteryup, null, this
     );
 
     var removeFreeze = function (redcar, freeze) {
@@ -235,6 +237,14 @@ function update() {
     }
     this.game.physics.arcade.overlap(
         redcar, freeze, removeFreeze, null, this
+    );
+
+    var removeFreeze = function (bluecar, freeze) {
+        console.log('removeFreeze')
+        freeze.kill();
+    }
+    this.game.physics.arcade.overlap(
+        bluecar, freeze, removeFreeze, null, this
     );
 
 
