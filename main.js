@@ -9,17 +9,16 @@ game.state.add("gameState", gameState);
 function preload() {
 
     game.load.spritesheet('redcar', 'assets/pixel art car 1 (2).png', 60, 25);
-    game.load.spritesheet('slow power',
-        'assets/slow power up 1.png',
-        400, 400);
-    game.load.spritesheet('rewind power',
-        'assets/rewind power up 1.png', 512, 512);
-    game.load.spritesheet('battery down',
-        'assets/battery down.png', 264, 129);
-    game.load.spritesheet('battery up',
-        'assets/battery up 2.png', 512, 512);
-    game.load.spritesheet('freexe power',
-        'assets/freexe power up.png', 150, 200);
+    game.load.image('slow power',
+        'assets/slow power up 1.png');
+    game.load.image('rewind power',
+        'assets/rewind power up 1.png');
+    game.load.image('battery down',
+        'assets/battery down.png');
+    game.load.image('battery up',
+        'assets/battery up 2.png');
+    game.load.image('freexe power',
+        'assets/freexe power up.png');
 
     game.load.spritesheet('bluecar', 'assets/pixel art car 1 (1).png', 60, 25);
     game.load.spritesheet('chicken', 'assets/New Piskel.png', 32, 32);
@@ -33,40 +32,36 @@ var battery2;
 var freeze;
 var rewind;
 var slowpower;
-var chicken; 
+var chicken;
+var redcar;
 
 function create() {
 
-	batteryup = game.add.sprite(50, 120, 'battery up')
-	
-	rewind = game.add.sprite(300,200, 'rewind power');
-	game.physics.arcade.enable(rewind);
-	
+    batteryup = game.add.sprite(50, 120, 'battery up');
+    game.physics.arcade.enable(batteryup);
+
+    rewind = game.add.sprite(300, 200, 'rewind power');
+    game.physics.arcade.enable(rewind);
 
     batterydown = game.add.sprite(150, 250, 'battery down');
-	
+    game.physics.arcade.enable(batterydown);
+
     freeze = game.add.sprite(-20, -20, 'freexe power');
 
     slowpower = game.add.sprite(150, 150, 'slow power');
     game.physics.arcade.enable(slowpower);
-	
-	chicekn = game.add.sprite(200, 200, 'chicken');
 
-	
-	
-	
-	
-	
+    chicken = game.add.sprite(200, 200, 'chicken');
+    game.physics.arcade.enable(chicken);
 
+    redcar = this.game.add.sprite(180, 225, 'redcar');
 
-    this.redcar = this.game.add.sprite(180, 225, 'redcar')
+    redcar.anchor.set(0.5);
 
-    this.redcar.anchor.set(0.5);
+    // line makes the chicken sprite follow the car//
+    redcar.addChild(chicken);
 
-    // line makes the freeze sprite follow the car//
-    this.redcar.addChild(freeze);
-
-    game.physics.arcade.enable(this.redcar);
+    game.physics.arcade.enable(redcar);
 
 
     this.cursor = {
@@ -78,7 +73,7 @@ function create() {
 
 
 
-    this.bluecar = this.game.add.sprite(90, 225, 'bluecar')
+    this.bluecar = this.game.add.sprite(90, 225, 'bluecar');
 
     this.bluecar.anchor.set(0.5);
 
@@ -92,30 +87,30 @@ function create() {
         right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
     };
 
-    this.redcar.animations.add('left', [0, 1, 2, 3], 10, true);
+    redcar.animations.add('left', [0, 1, 2, 3], 10, true);
     this.bluecar.animations.add('right', [0, 1, 2, 3], 10, true);
 
-	
-	
-	slowpower.scale.setTo(0.1, 0.1);
-	batterydown.scale.setTo(0.2, 0.2);
-	rewind.scale.setTo(0.1,0.1);
-	batteryup.scale.setTo(0.1,0.1)
-	
+
+
+    slowpower.scale.setTo(0.1, 0.1);
+    batterydown.scale.setTo(0.2, 0.2);
+    rewind.scale.setTo(0.1, 0.1);
+    batteryup.scale.setTo(0.1, 0.1)
+
 }
 
 function update() {
-    this.redcar.body.velocity.x = 0;
-    this.redcar.body.velocity.y = 0;
-    this.redcar.body.angularVelocity = 0;
+    redcar.body.velocity.x = 0;
+    redcar.body.velocity.y = 0;
+    redcar.body.angularVelocity = 0;
 
     if (this.cursor.left.isDown) {
-        this.redcar.body.angularVelocity = -250;
+        redcar.body.angularVelocity = -250;
     } else if (this.cursor.right.isDown) {
-        this.redcar.body.angularVelocity = 250;
+        redcar.body.angularVelocity = 250;
     }
     if (this.cursor.up.isDown) {
-        this.game.physics.arcade.velocityFromAngle(this.redcar.angle, 250, this.redcar.body.velocity);
+        this.game.physics.arcade.velocityFromAngle(redcar.angle, 250, redcar.body.velocity);
     }
 
     this.bluecar.body.velocity.x = 0;
@@ -145,8 +140,28 @@ function update() {
     };
 
     this.game.physics.arcade.overlap(
-        this.redcar, slowpower, removeSlowpower, null, this
+        redcar, slowpower, removeSlowpower, null, this
     );
+
+
+    var removeRewind = function (redcar, rewind) {
+        console.log('removeRewind')
+        rewind.kill();
+    }
+
+    this.game.physics.arcade.overlap(
+        this.bluecar, rewind, removeRewind, null, this
+    );
+
+    var removeRewind = function (redcar, rewind) {
+        console.log('removeRewind')
+        rewind.kill();
+    }
+
+    this.game.physics.arcade.overlap(
+        this.bluecar, rewind, removeRewind, null, this
+    );
+
 	
 	
 	
@@ -168,6 +183,15 @@ function update() {
 		this.bluecar, rewind, removeRewind, null, this
 	);
 
+    var removeBatteryup = function (redcar, batteryup) {
+        console.log('removeBatteryup')
+        rewind.kill();
+    }
+
+
+    this.game.physics.arcade.overlap(
+        this.bluecar, batteryup, removeBatteryup, null, this
+    );
 
 
 }
