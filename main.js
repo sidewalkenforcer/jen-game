@@ -34,6 +34,68 @@ var rewind;
 var slowpower;
 var chicken;
 var redcar;
+ var level = [
+'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+'x                                                                        x',
+'x                                                                        x',
+'xxx     xxxxxxxxxxxxxxxxxxxxx     x                                      x',
+'x       x o                       x     x    xxxxxxxxxxxxxxxxxx          x',
+'x       x                         x     x    x                x          x',
+'x     xxx     x       xxxxxxxxxxxxx     x    x  o             x          x',
+'x       x     x                   x     x    x                x          x',
+'xxx     x     x                   x     x    xxxxxxxxxxx                 x',
+'x       x     xxxxx               x     x              x                 x',
+'x       x     x                         x              xx                x',
+'xxxxxxxxx     x       xxxxxx            x              xxxx      xxxxxxxxx', 
+'x                                      xxxxxxxxx          x              x',
+'x                                      x                  x              x',
+'xxx     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                  x              x',
+'x       x                                      xxxxxxxxxxxxxxxxxxx       x',
+'x       x                                      x                 x       x',
+'x     xxx                                      x o               x       x',
+'x       x       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                 x       x',
+'x       x                            x         xxxxx       x     x       x', 
+'xxx     x                            x             x       x     x   o   x',
+'x       x                            x      x      x       x     x       x',
+'x     xxxxxxxxxxxxxxxxxxxxxxxxx      x      x      x       x     xxxxxxxxx',          
+'x                             x             x      x       x             x',
+'x                         o   x             x              x             !',
+'x                             x             x              x             !',               
+'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+            
+            
+            
+        ];
+        var numTilesWide = level[0].length;
+        var numPixelsWide = 20 * numTilesWide;
+
+        for (var i = 0; i < level.length; i++) {
+            for (var j = 0; j < level[i].length; j++) {
+
+//                if (level[i][j] == '!') {
+//                    var finishLine = this.game.add.sprite(30+20*j, 30+20*i, 'finishLine');
+//                    this.finishLines.add(finishLine);
+////                    var wall = this.walls.create(30+20*j, 30+20*i, 'wall');
+//                    finishLine.body.immovable = true; 
+//                }
+//
+//                else if (level[i][j] == 'o') {
+//                    var gasoline = this.game.add.sprite(30+20*j, 30+20*i, 'gasoline');
+//                    this.gasolines.add(gasoline);
+//                }
+                
+                var x = (20*j);
+                var y = (20*i);
+
+                if (level[i][j] == 'x') {
+//                    var enemy = this.game.add.sprite(30+20*j, 30+20*i, 'enemy');
+                    var enemy = this.game.add.sprite(x, y, 'enemy');
+                    var enemy = this.game.add.sprite(2 * numPixelsWide -x , y, 'enemy');
+                    this.enemies.add(enemy);
+                }
+            }
+        }
+    },
 
 function create() {
 
