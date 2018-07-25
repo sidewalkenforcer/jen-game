@@ -112,6 +112,9 @@ function create() {
 
     // line makes the chicken sprite follow the car//
     redcar.addChild(chicken);
+    chicken.anchor.set(0.5);
+    chicken.x = 0;
+    chicken.y = 0;
 
     this.cursor = {
         up: this.game.input.keyboard.addKey(Phaser.Keyboard.UP),
@@ -212,13 +215,20 @@ function update() {
 
     var removeBatteryup = function (redcar, batteryup) {
         console.log('removeBatteryup')
-        rewind.kill();
+        batteryup.kill();
     }
-
-
     this.game.physics.arcade.overlap(
         redcar, batteryup, removeBatteryup, null, this
     );
+
+    var removeBatteryup = function (bluecar, batteryup) {
+        console.log('removeBatteryup')
+        batteryup.kill();
+    }
+    this.game.physics.arcade.overlap(
+        this.bluecar, batteryup, removeBatteryup, null, this
+    );
+
     var removeFreeze = function (redcar, freeze) {
         console.log('removeFreeze')
         freeze.kill();
@@ -227,4 +237,20 @@ function update() {
         redcar, freeze, removeFreeze, null, this
     );
 
+
+    var removeBatterydown = function (bluecar, batterydown) {
+        console.log('removeBatterydown')
+        batterydown.kill();
+    }
+    this.game.physics.arcade.overlap(
+        this.bluecar, batterydown, removeBatterydown, null, this
+    );
+
+    var removeBatterydown = function (redcar, batterydown) {
+        console.log('removeBatterydown')
+        batterydown.kill();
+    }
+    this.game.physics.arcade.overlap(
+        redcar, batterydown, removeBatterydown, null, this
+    );
 }
