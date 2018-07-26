@@ -106,10 +106,17 @@ function create() {
         wall.body.immovable = true;
     });
 
+<<<<<<< HEAD
     batteryup = game.add.sprite(600, 750, 'battery up');
     game.physics.arcade.enable(batteryup);
 
     rewind = game.add.sprite(650, 750, 'rewind power');
+=======
+    batteryup = game.add.sprite(35, 160, 'battery up');
+    game.physics.arcade.enable(batteryup);
+
+    rewind = game.add.sprite(500, 220, 'rewind power');
+>>>>>>> 78c62b11e03f0bcd77c3e1df340b037cfc13b6d3
     game.physics.arcade.enable(rewind);
 
     batterydown = game.add.sprite(700, 750, 'battery down');
