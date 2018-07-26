@@ -266,6 +266,7 @@ function update() {
     );
 
     this.game.physics.arcade.collide(redcar, walls);
+    this.game.physics.arcade.collide(bluecar, walls);
 
 
     var removeBatterydown = function (bluecar, batterydown) {
