@@ -45,19 +45,6 @@ function create() {
     walls = game.add.group();
     var level = [
         'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-<<<<<<< HEAD
-        'x                                                                x',
-        'x                                                                x',
-        'x    xxxxxxxxxxxxxxxx     x                                      x',
-        'x    x o                  x     x    xxxxxxxxxxxxxxx             x',
-        'x    x                    x     x    x             x             x',
-        'x  xxx     x      xxxxxxxxx     x    x  o          x             x',
-        'x    x     x              x     x    x             x             x',
-        'x    x     x              x     x    xxxxxxxxxxx                 x',
-        'x    x     xxxxx          x     x              x                 x',
-        'x    x     x                    x              xx        xxxxxxxxx',
-        'xxxxxx     x     xxxx           x              xxxx      x       x', 
-=======
         'x                                                        x       x',
         'x                                                        x       x',
         'x    xxxxxxxxxxxxxxxx     x                              x       x',
@@ -69,23 +56,10 @@ function create() {
         'x    x     xxxxx          x     x              x         x       x',
         'x    x     x                    x              xx        x       x',
         'xxxxxx     x     xxxx           x              xxxx      x       x',
->>>>>>> 198fb22edcbcd38d32acb1554b774346e6be7371
         'x                              xxxxxxxxx          x      x       x',
         'x                              x                  x      x       x',
         'x     xxxxxxxxxxxxxxxxxxxxxxxxxx                  x      x       x',
         'x     x                                xxxxxxxxxxxxxxxxxxx       x',
-<<<<<<< HEAD
-        'x     x                                x                         x',
-        'x     x                                x o                       x',
-        'x     x      xxxxxxxxxxxxxxxxxxxxxxxxxxx                         x',
-        'x     x                      x         xxxxx       x             x', 
-        'x     x                      x             x       x             x',
-        'x     x                      x      x      x       x             x',
-        'x     xxxxxxxxxxxxxxxxx      x      x      x       x             x',          
-        'x                     x             x      x       x             !',
-        'x                 o   x             x              x             !',
-        'x                     x             x              x             !',               
-=======
         'x     x                                x                 x       x',
         'x     x                                x o               x       x',
         'x     x      xxxxxxxxxxxxxxxxxxxxxxxxxxx                 x       x',
@@ -96,7 +70,6 @@ function create() {
         'x                     x             x      x       x     !       x',
         'x                 o   x             x              x     !       !',
         'x                     x             x              x     !       !',
->>>>>>> 198fb22edcbcd38d32acb1554b774346e6be7371
         'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     ];
     var numTilesWide = level[0].length;
