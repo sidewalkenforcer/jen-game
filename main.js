@@ -288,7 +288,7 @@ function update() {
         console.log('addChicken')
         redcar.addChild(chicken);
         chicken.anchor.set(0.5);
-        chicken.x = -40;
+        chicken.x = -60;
         chicken.y = 0;
     }
 
