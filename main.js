@@ -20,6 +20,7 @@ function preload() {
     game.load.image('freexe power',
         'assets/freexe power up.png');
     this.game.load.image('enemy', 'assets/New P.png');
+    this.game.load.image('finishLine', 'assets/finishLine.png');
 
     game.load.spritesheet('bluecar', 'assets/pixel art car 1 (1).png', 60, 25);
     game.load.spritesheet('chicken', 'assets/New Piskel.png', 32, 32);
@@ -37,37 +38,38 @@ var chicken;
 var redcar;
 var blueControls;
 var bluecar;
-
+var finishLine;
+var walls;
 function create() {
-
+    walls = game.add.group();
     var level = [
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        'x                                                                        x',
-        'x                                                                        x',
-        'xxx     xxxxxxxxxxxxxxxxxxxxx     x                                      x',
-        'x       x o                       x     x    xxxxxxxxxxxxxxxxxx          x',
-        'x       x                         x     x    x                x          x',
-        'x     xxx     x       xxxxxxxxxxxxx     x    x  o             x          x',
-        'x       x     x                   x     x    x                x          x',
-        'xxx     x     x                   x     x    xxxxxxxxxxx                 x',
-        'x       x     xxxxx               x     x              x                 x',
-        'x       x     x                         x              xx                x',
-        'xxxxxxxxx     x       xxxxxx            x              xxxx      xxxxxxxxx',
-        'x                                      xxxxxxxxx          x              x',
-        'x                                      x                  x              x',
-        'xxx     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                  x              x',
-        'x       x                                      xxxxxxxxxxxxxxxxxxx       x',
-        'x       x                                      x                 x       x',
-        'x     xxx                                      x o               x       x',
-        'x       x       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                 x       x',
-        'x       x                            x         xxxxx       x     x       x',
-        'xxx     x                            x             x       x     x   o   x',
-        'x       x                            x      x      x       x     x       x',
-        'x     xxxxxxxxxxxxxxxxxxxxxxxxx      x      x      x       x     xxxxxxxxx',
-        'x                             x             x      x       x             x',
-        'x                         o   x             x              x             !',
-        'x                             x             x              x             !',
-        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+        'x                                                        x       x',
+        'x                                                        x       x',
+        'x    xxxxxxxxxxxxxxxx     x                              x       x',
+        'x    x o                  x     x    xxxxxxxxxxxxxxx     x       x',
+        'x    x                    x     x    x             x     x       x',
+        'x  xxx     x      xxxxxxxxx     x    x  o          x     x       x',
+        'x    x     x              x     x    x             x     x       x',
+        'x    x     x              x     x    xxxxxxxxxxx         x       x',
+        'x    x     xxxxx          x     x              x         x       x',
+        'x    x     x                    x              xx        x       x',
+        'xxxxxx     x     xxxx           x              xxxx      x       x', 
+        'x                              xxxxxxxxx          x      x       x',
+        'x                              x                  x      x       x',
+        'x     xxxxxxxxxxxxxxxxxxxxxxxxxx                  x      x       x',
+        'x     x                                xxxxxxxxxxxxxxxxxxx       x',
+        'x     x                                x                 x       x',
+        'x     x                                x o               x       x',
+        'x     x      xxxxxxxxxxxxxxxxxxxxxxxxxxx                 x       x',
+        'x     x                      x         xxxxx       x     x       x', 
+        'x     x                      x             x       x     x       x',
+        'x     x                      x      x      x       x     x       x',
+        'x     xxxxxxxxxxxxxxxxx      x      x      x       x     x       x',          
+        'x                     x             x      x       x     !       x',
+        'x                 o   x             x              x     !       !',
+        'x                     x             x              x     !       !',               
+        'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     ];
     var numTilesWide = level[0].length;
     var numPixelsWide = 20 * numTilesWide;
@@ -84,11 +86,26 @@ function create() {
             if (level[i][j] == 'x') {
                 //                    var enemy = this.game.add.sprite(30+20*j, 30+20*i, 'enemy');
                 var enemy = this.game.add.sprite(x, y, 'enemy');
-                var enemy = this.game.add.sprite(2 * numPixelsWide - x, y, 'enemy');
-
+                walls.add(enemy);
+                var enemy = this.game.add.sprite(2 * numPixelsWide - x, y, 'enemy'); 
+                walls.add(enemy);
+            }
+             else if(level[i][j] == '!'){
+                    
+                var finishLine = game.add.sprite(x, y, 'finishLine');
+                var finishLine = game.add.sprite(2 * numPixelsWide-x, y, 'finishLine');
+                 
             }
         }
+
     }
+    
+    game.physics.arcade.enable(walls);
+    
+    walls.forEach(function(wall) {
+        wall.body.immovable = true;
+    });
+    
     batteryup = game.add.sprite(50, 120, 'battery up');
     game.physics.arcade.enable(batteryup);
 
@@ -146,7 +163,6 @@ function create() {
     batterydown.scale.setTo(0.2, 0.2);
     rewind.scale.setTo(0.1, 0.1);
     batteryup.scale.setTo(0.1, 0.1)
-
 }
 
 function update() {
@@ -219,6 +235,8 @@ function update() {
     this.game.physics.arcade.overlap(
         redcar, batteryup, removeBatteryup, null, this
     );
+    
+
    
 	
 	var removeFreeze = function (redcar, freeze) {
@@ -236,5 +254,7 @@ function update() {
     this.game.physics.arcade.overlap(
         bluecar, freeze, removeFreeze, null, this
     );
+    
+    this.game.physics.arcade.collide(redcar, walls);
 
 }
