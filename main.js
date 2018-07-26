@@ -104,7 +104,7 @@ function create() {
     slowpower = game.add.sprite(150, 150, 'slow power');
     game.physics.arcade.enable(slowpower);
 
-    chicken = game.add.sprite(200, 200, 'chicken');
+    chicken = game.add.sprite(400, 200, 'chicken');
     game.physics.arcade.enable(chicken);
 
     redcar = game.add.sprite(180, 225, 'redcar');
@@ -112,21 +112,21 @@ function create() {
     redcar.anchor.set(0.5);
 
     // line makes the chicken sprite follow the car//
-    redcar.addChild(chicken);
-    chicken.anchor.set(0.5);
-    chicken.x = 0;
-    chicken.y = 0;
+    //    redcar.addChild(chicken);
+    //chicken.anchor.set(0.5);
+    //chicken.x = 0;
+    //chicken.y = 0;
 
     this.cursor = {
         up: this.game.input.keyboard.addKey(Phaser.Keyboard.UP),
-        down: this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN),
+        back: this.game.input.keyboard.addKey(Phaser.Keyboard.BACK),
         left: this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT),
         right: this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
     };
 
 
 
-    bluecar = this.game.add.sprite(90, 225, 'bluecar');
+    bluecar = this.game.add.sprite(90, 500, 'bluecar');
 
     bluecar.anchor.set(0.5);
 
@@ -253,7 +253,7 @@ function update() {
         batterydown.kill();
     }
     this.game.physics.arcade.overlap(
-        this.bluecar, batterydown, removeBatterydown, null, this
+        bluecar, batterydown, removeBatterydown, null, this
     );
 
     var removeBatterydown = function (redcar, batterydown) {
@@ -263,4 +263,21 @@ function update() {
     this.game.physics.arcade.overlap(
         redcar, batterydown, removeBatterydown, null, this
     );
+
+    var addChicken = function (redcar, chicken) {
+        console.log('addChicken')
+        redcar.addChild(chicken);
+        chicken.anchor.set(0.5);
+        chicken.x = -40;
+        chicken.y = 0;
+    }
+
+    this.game.physics.arcade.overlap(
+        bluecar, chicken, addChicken, null, this
+    );
+    this.game.physics.arcade.overlap(
+        redcar, chicken, addChicken, null, this
+    );
+
+
 }
