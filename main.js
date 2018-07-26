@@ -106,25 +106,25 @@ function create() {
         wall.body.immovable = true;
     });
 
-    batteryup = game.add.sprite(50, 120, 'battery up');
+    batteryup = game.add.sprite(600, 750, 'battery up');
     game.physics.arcade.enable(batteryup);
 
-    rewind = game.add.sprite(300, 200, 'rewind power');
+    rewind = game.add.sprite(650, 750, 'rewind power');
     game.physics.arcade.enable(rewind);
 
-    batterydown = game.add.sprite(150, 250, 'battery down');
+    batterydown = game.add.sprite(700, 750, 'battery down');
     game.physics.arcade.enable(batterydown);
 
-    freeze = game.add.sprite(100, 50, 'freexe power');
+    freeze = game.add.sprite(750, 750, 'freexe power');
     game.physics.arcade.enable(freeze);
 
-    slowpower = game.add.sprite(150, 150, 'slow power');
+    slowpower = game.add.sprite(800, 750, 'slow power');
     game.physics.arcade.enable(slowpower);
 
-    chicken = game.add.sprite(400, 200, 'chicken');
+    chicken = game.add.sprite(400, 470, 'chicken');
     game.physics.arcade.enable(chicken);
 
-    redcar = game.add.sprite(180, 225, 'redcar');
+    redcar = game.add.sprite(60, 210, 'redcar');
     game.physics.arcade.enable(redcar);
     redcar.anchor.set(0.5);
 
@@ -143,7 +143,7 @@ function create() {
 
 
 
-    bluecar = this.game.add.sprite(90, 500, 'bluecar');
+    bluecar = this.game.add.sprite(60, 190, 'bluecar');
 
     bluecar.anchor.set(0.5);
     game.physics.arcade.enable(bluecar);
