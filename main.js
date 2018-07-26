@@ -40,6 +40,7 @@ var blueControls;
 var bluecar;
 var finishLine;
 var walls;
+
 function create() {
     walls = game.add.group();
     var level = [
@@ -54,7 +55,7 @@ function create() {
         'x    x     x              x     x    xxxxxxxxxxx         x       x',
         'x    x     xxxxx          x     x              x         x       x',
         'x    x     x                    x              xx        x       x',
-        'xxxxxx     x     xxxx           x              xxxx      x       x', 
+        'xxxxxx     x     xxxx           x              xxxx      x       x',
         'x                              xxxxxxxxx          x      x       x',
         'x                              x                  x      x       x',
         'x     xxxxxxxxxxxxxxxxxxxxxxxxxx                  x      x       x',
@@ -62,13 +63,13 @@ function create() {
         'x     x                                x                 x       x',
         'x     x                                x o               x       x',
         'x     x      xxxxxxxxxxxxxxxxxxxxxxxxxxx                 x       x',
-        'x     x                      x         xxxxx       x     x       x', 
+        'x     x                      x         xxxxx       x     x       x',
         'x     x                      x             x       x     x       x',
         'x     x                      x      x      x       x     x       x',
-        'x     xxxxxxxxxxxxxxxxx      x      x      x       x     x       x',          
+        'x     xxxxxxxxxxxxxxxxx      x      x      x       x     x       x',
         'x                     x             x      x       x     !       x',
         'x                 o   x             x              x     !       !',
-        'x                     x             x              x     !       !',               
+        'x                     x             x              x     !       !',
         'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     ];
     var numTilesWide = level[0].length;
@@ -87,25 +88,24 @@ function create() {
                 //                    var enemy = this.game.add.sprite(30+20*j, 30+20*i, 'enemy');
                 var enemy = this.game.add.sprite(x, y, 'enemy');
                 walls.add(enemy);
-                var enemy = this.game.add.sprite(2 * numPixelsWide - x, y, 'enemy'); 
+                var enemy = this.game.add.sprite(2 * numPixelsWide - x, y, 'enemy');
                 walls.add(enemy);
-            }
-             else if(level[i][j] == '!'){
-                    
+            } else if (level[i][j] == '!') {
+
                 var finishLine = game.add.sprite(x, y, 'finishLine');
-                var finishLine = game.add.sprite(2 * numPixelsWide-x, y, 'finishLine');
-                 
+                var finishLine = game.add.sprite(2 * numPixelsWide - x, y, 'finishLine');
+
             }
         }
 
     }
-    
+
     game.physics.arcade.enable(walls);
-    
-    walls.forEach(function(wall) {
+
+    walls.forEach(function (wall) {
         wall.body.immovable = true;
     });
-    
+
     batteryup = game.add.sprite(50, 120, 'battery up');
     game.physics.arcade.enable(batteryup);
 
@@ -146,8 +146,6 @@ function create() {
     bluecar = this.game.add.sprite(90, 500, 'bluecar');
 
     bluecar.anchor.set(0.5);
-
-
     game.physics.arcade.enable(bluecar);
 
     blueControls = {
@@ -165,7 +163,9 @@ function create() {
     slowpower.scale.setTo(0.1, 0.1);
     batterydown.scale.setTo(0.2, 0.2);
     rewind.scale.setTo(0.1, 0.1);
-    batteryup.scale.setTo(0.1, 0.1)
+    batteryup.scale.setTo(0.1, 0.1);
+    bluecar.scale.setTo(0.6, 0.6);
+    redcar.scale.setTo(0.6, 0.6);
 }
 
 function update() {
@@ -264,7 +264,7 @@ function update() {
     this.game.physics.arcade.overlap(
         bluecar, freeze, removeFreeze, null, this
     );
-    
+
     this.game.physics.arcade.collide(redcar, walls);
 
 
